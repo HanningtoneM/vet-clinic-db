@@ -11,24 +11,23 @@ CREATE TABLE animals (
 
 ALTER TABLE animals ADD COLUMN species VARCHAR(100);
 
-/* Query and update table */
+/* Query multiple tables */
 
-INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg)
-VALUES('Charmander', '2020-02-08', 0, false, -11);
+CREATE TABLE owners (
+  id INT GENERATED ALWAYS AS IDENTITY,
+  full_name VARCHAR(20),
+  age INTEGER NOT NULL,
+  PRIMARY KEY(id)
+);
 
-INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg)
-VALUES('Plantmon', '2022-11-15', 2, true, -5.7);
+CREATE TABLE species (
+  id INTEGER GENERATED ALWAYS AS IDENTITY,
+  name VARCHAR(20),
+  PRIMARY KEY(id)
+);
 
-INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg)
-VALUES('Squirtle', '1993-04-02', 3, false, -12.13);
-
-INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg)
-VALUES('Angemon', '2005-06-12', 1 , true, -45);
-
-INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg)
-VALUES('Boarmon', '2005-06-07', 7, true, 20.04);
-
-INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg)
-VALUES('Blossom', '1998-10-13', 3, true, 17);
-
-ALTER TABLE animals ADD COLUMN species VARCHAR(100);
+ALTER TABLE animals DROP COLUMN species;
+ALTER TABLE animals ADD COLUMN species_id INTEGER;
+ALTER TABLE animals ADD COLUMN owner_id INTEGER;
+ALTER TABLE animals ADD FOREIGN KEY (species_id) REFERENCES species(id);
+ALTER TABLE animals ADD FOREIGN KEY (owner_id) REFERENCES owners(id);
