@@ -32,3 +32,16 @@ CREATE TABLE treatment_histories(
   medical_history_id INT REFERENCES medical_histories(id)
 );
 
+CREATE TABLE invoice_items(
+  id SERIAL PRIMARY KEY,
+  unit_price DECIMAL(3, 2),
+  quantity INT,
+  total_price DECIMAL(3, 2),
+  invoice_id INT REFERENCES invoices(id),
+  treatment_id INT REFERENCES treatments(id)
+);
+
+CREATE INDEX patient_ids ON patients (id);
+CREATE INDEX medical_history_ids ON medical_histories (id);
+CREATE INDEX treatment_ids ON treatments (id);
+CREATE INDEX invoice_ids ON invoices (id);
