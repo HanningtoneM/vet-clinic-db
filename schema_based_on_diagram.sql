@@ -45,3 +45,5 @@ CREATE INDEX patient_ids ON patients (id);
 CREATE INDEX medical_history_ids ON medical_histories (id);
 CREATE INDEX treatment_ids ON treatments (id);
 CREATE INDEX invoice_ids ON invoices (id);
+CREATE INDEX treatment_histories_treatment_id ON treatment_histories (treatment_id);
+CREATE INDEX treatment_histories_medical_history_id ON treatment_histories (medical_history_id);
